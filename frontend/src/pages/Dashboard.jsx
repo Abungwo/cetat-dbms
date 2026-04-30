@@ -11,13 +11,13 @@ export default function Dashboard() {
   // 🔥 FETCH BOTH DATA SOURCES
   useEffect(() => {
     // Participants
-    fetch("http://localhost:5000/api/participants")
+    fetch("https://cetat-backend.onrender.com/api/participants")
       .then(res => res.json())
       .then(data => setParticipants(data))
       .catch(err => console.error(err));
 
     // Programs
-    fetch("http://localhost:5000/api/programs")
+    fetch("https://cetat-backend.onrender.com/api/programs")
       .then(res => res.json())
       .then(data => setPrograms(data))
       .catch(err => console.error(err));

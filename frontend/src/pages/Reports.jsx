@@ -10,7 +10,7 @@ export default function Reports() {
   const [programs, setPrograms] = useState([]);
 
   const fetchPrograms = () => {
-  fetch("http://localhost:5000/api/programs")
+  fetch("https://cetat-backend.onrender.com/api/programs")
     .then(res => res.json())
     .then(data => {
       setPrograms(data.map(p => p.name));
@@ -25,7 +25,7 @@ export default function Reports() {
   // ✅ Generate report
   const generateReport = async () => {
     try {
-      let url = "http://localhost:5000/api/participants/report";
+      let url = "https://cetat-backend.onrender.com/api/participants/report";
 
       const params = [];
       if (program) params.push(`program=${program}`);

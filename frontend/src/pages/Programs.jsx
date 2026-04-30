@@ -12,7 +12,7 @@ export default function Programs() {
 
   // ✅ Fetch programs from backend
   const fetchPrograms = () => {
-    fetch("http://localhost:5000/api/programs")
+    fetch("https://cetat-backend.onrender.com/api/programs")
       .then(res => res.json())
       .then(data => setPrograms(data))
       .catch(err => console.error(err));
@@ -27,7 +27,7 @@ export default function Programs() {
     if (!form.name) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/programs", {
+      const res = await fetch("https://cetat-backend.onrender.com/api/programs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -58,7 +58,7 @@ export default function Programs() {
     if (!window.confirm("Delete this program?")) return;
 
     try {
-      await fetch(`https://github.com/Abungwo/cetat-dbms.git/api/programs/${id}`, {
+      await fetch(`https://cetat-backend.onrender.com/api/programs/${id}`, {
         method: "DELETE"
       });
 

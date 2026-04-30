@@ -28,7 +28,7 @@ export default function AddParticipant() {
     }
 
     try {
-      await fetch("http://localhost:5000/api/participants", {
+      await fetch("https://cetat-backend.onrender.com/api/participants", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

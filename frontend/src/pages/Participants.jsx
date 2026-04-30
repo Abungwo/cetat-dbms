@@ -9,7 +9,7 @@ export default function Participants() {
   const role = localStorage.getItem("role") || "admin";
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/participants")
+    fetch("https://cetat-backend.onrender.com/api/participants")
       .then((res) => res.json())
       .then((data) => setParticipants(data))
       .catch((err) => console.error(err));
@@ -19,7 +19,7 @@ export default function Participants() {
         if (!window.confirm("Are you sure you want to delete?")) return;
 
     try {
-      await fetch(`http://localhost:5000/api/participants/${id}`, {
+      await fetch(`https://cetat-backend.onrender.com/api/participants/${id}`, {
         method: "DELETE",
       });
 

@@ -16,7 +16,7 @@ export default function EditParticipant() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/participants`)
+    fetch(`https://cetat-backend.onrender.com/api/participants`)
       .then(res => res.json())
       .then(data => {
         const found = data.find(p => p._id === id);
@@ -32,7 +32,7 @@ export default function EditParticipant() {
   };
 
   const handleUpdate = async () => {
-    await fetch(`http://localhost:5000/api/participants/${id}`, {
+    await fetch(`https://cetat-backend.onrender.com/api/participants/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
