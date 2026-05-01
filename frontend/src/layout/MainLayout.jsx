@@ -20,11 +20,14 @@ export default function MainLayout({ children, title }) {
 
       {/* RIGHT SIDE */}
       <div style={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        background: "#f5f5f5"
-      }}>
+      width: "220px",
+      background: "#111827",
+      color: "white",
+      height: "100%",        // fill parent
+      minHeight: "100vh",    // fallback
+      position: "sticky",
+      top: 0
+    }}>
 
         {/* HEADER */}
         <div style={{
