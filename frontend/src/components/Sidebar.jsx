@@ -6,13 +6,13 @@ export default function Sidebar() {
   const location = useLocation();
 
   const sidebarStyle = {
-    width: "220px",
-    height: "100vh",
-    background: "#111827",
-    display: "flex",
-    flexDirection: "column",
-    padding: "20px",
-    color: "white",
+  width: "220px",
+  background: "#111827",
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "20px",
+  alignSelf: "stretch",   // 🔥 THIS IS THE REAL FIX
 };
 
   const linkStyle = {
