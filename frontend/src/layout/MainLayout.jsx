@@ -13,67 +13,78 @@ export default function MainLayout({ children, title }) {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      minHeight: "100vh",
-      alignItems: "stretch"   // 🔥 CRITICAL FIX
-    }}>
-      
-      {/* SIDEBAR */}
+    <div style={layout}>
+      {/* Sidebar */}
       <Sidebar />
 
-      {/* RIGHT SIDE */}
-      <div style={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column"
-      }}>
-        
-        {/* HEADER */}
-        <div style={{
-          background: "#1f2937",
-          color: "white",
-          padding: "15px 20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
+      {/* Right side */}
+      <div style={right}>
+        {/* Header */}
+        <div style={header}>
           <h3 style={{ margin: 0 }}>{title}</h3>
 
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
             <span>👤 {name} ({role})</span>
-            <button
-              onClick={handleLogout}
-              style={{
-                background: "#ef4444",
-                color: "white",
-                border: "none",
-                padding: "5px 10px",
-                cursor: "pointer",
-                borderRadius: "5px"
-              }}
-            >
+            <button onClick={handleLogout} style={logoutBtn}>
               Logout
             </button>
           </div>
         </div>
 
-        {/* CONTENT */}
-        <div style={{ flex: 1, padding: "20px" }}>
+        {/* Content */}
+        <div style={content}>
           {children}
         </div>
 
-        {/* FOOTER */}
-        <footer style={{
-          background: "#1f2937",
-          color: "white",
-          padding: "20px"
-        }}>
+        {/* Footer */}
+        <footer style={footer}>
           <h4>CETAT DBMS</h4>
           <p>A cloud-based system for managing participants and programs.</p>
         </footer>
-
       </div>
     </div>
   );
 }
+
+/* STYLES */
+
+const layout = {
+  display: "flex",
+  alignItems: "stretch", // 🔥 CRITICAL
+  minHeight: "100vh"
+};
+
+const right = {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column"
+};
+
+const header = {
+  background: "#1f2937",
+  color: "white",
+  padding: "15px 20px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+};
+
+const content = {
+  flex: 1,
+  padding: "20px"
+};
+
+const footer = {
+  background: "#1f2937",
+  color: "white",
+  padding: "20px"
+};
+
+const logoutBtn = {
+  background: "#ef4444",
+  color: "white",
+  border: "none",
+  padding: "5px 10px",
+  cursor: "pointer",
+  borderRadius: "5px"
+};
