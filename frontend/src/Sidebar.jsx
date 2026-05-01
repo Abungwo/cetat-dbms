@@ -19,12 +19,12 @@ export default function Sidebar() {
 
 const sidebarStyle = {
   width: "220px",
-  minHeight: "100vh",   // ✅ allows growth
   background: "#111827",
   display: "flex",
   flexDirection: "column",
   gap: "10px",
   padding: "20px",
+  alignSelf: "stretch",   // 🔥 THIS IS THE REAL FIX
 };
 
 const btn = {
