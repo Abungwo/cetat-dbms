@@ -34,10 +34,11 @@ export default function MainLayout({ children, title }) {
           justifyContent: "space-between"
         }}>
           <h3><img 
-          src="/logo.png" 
-          alt="CETAT Logo" 
-          style={{ width: "35px", height: "35px" }}
-        /></h3>
+            src="/logo.png" 
+            alt="CETAT Logo" 
+            style={{ width: "35px", height: "35px" }}
+          />
+          </h3>
 
           <div>
             👤 {name} ({role})
