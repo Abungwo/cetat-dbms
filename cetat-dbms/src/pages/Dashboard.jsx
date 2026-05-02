@@ -17,14 +17,7 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  // 🔥 FUNDERS (auto refresh on load)
-  const [funderCount, setFunderCount] = useState(0);
-
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("funders")) || [];
-    setFunderCount(saved.length);
-  }, []);
-
+ 
   return (
     <MainLayout title="Dashboard">
 
@@ -42,13 +35,6 @@ export default function Dashboard() {
           value={loading ? "..." : participants.length} 
           icon="👥"
           onClick={() => navigate("/participants")}
-        />
-
-        <Card 
-          title="Funders" 
-          value={funderCount} 
-          icon="💰"
-          onClick={() => navigate("/funders")}
         />
 
         {/* QUICK ACTION */}
