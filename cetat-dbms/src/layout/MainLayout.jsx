@@ -1,5 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 export default function MainLayout({ children, title }) {
   const navigate = useNavigate();
@@ -34,9 +35,9 @@ export default function MainLayout({ children, title }) {
           justifyContent: "space-between"
         }}>
           <h3><img 
-            src="/logo.png" 
-            alt="CETAT Logo" 
-            style={{ width: "35px", height: "35px" }}
+            src={logo}
+            alt="CETAT Logo"
+            style={{ width: "40px", height: "40px", objectFit: "contain" }}
           />
           </h3>
 
