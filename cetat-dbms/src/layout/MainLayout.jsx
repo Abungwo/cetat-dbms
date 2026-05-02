@@ -4,9 +4,7 @@ import logo from "../assets/logo.png";
 
 export default function MainLayout({ children, title }) {
   const navigate = useNavigate();
-
-  const name = localStorage.getItem("name") || "User";
-  const role = localStorage.getItem("role") || "staff";
+  const role = localStorage.getItem("role") || "guest";
 
   const handleLogout = () => {
     localStorage.clear();
@@ -14,35 +12,41 @@ export default function MainLayout({ children, title }) {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      alignItems: "stretch",
-      minHeight: "100vh"
-    }}>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar />
 
-      <div style={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column"
-      }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        
         {/* HEADER */}
         <div style={{
           background: "#1f2937",
           color: "white",
           padding: "15px 20px",
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          alignItems: "center"
         }}>
-          <h3><img 
-            src={logo}
-            alt="CETAT Logo"
-            style={{ width: "40px", height: "40px", objectFit: "contain" }}
-          />
-          </h3>
+          
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            
+            {/* 🔥 FORCE IMAGE RENDER */}
+            <img
+              src={logo}
+              alt="logo"
+              style={{
+                width: "40px",
+                height: "40px",
+                background: "white",   // 🔥 makes it visible even if transparent
+                padding: "3px",
+                borderRadius: "6px"
+              }}
+            />
+
+            <h3 style={{ margin: 0 }}>{title}</h3>
+          </div>
 
           <div>
-            👤 {name} ({role})
+            <span>👤 {role}</span>
             <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
               Logout
             </button>
