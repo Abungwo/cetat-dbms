@@ -6,18 +6,24 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const [participants, setParticipants] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔥 FETCH PARTICIPANTS ONLY (no need for programs anymore)
+  // 🔥 FETCH PARTICIPANTS
   useEffect(() => {
     fetch("https://cetat-backend.onrender.com/api/participants")
       .then(res => res.json())
       .then(data => setParticipants(data))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  // ✅ FUNDERS
-  const funders = JSON.parse(localStorage.getItem("funders")) || [];
-  const funderCount = funders.length;
+  // 🔥 FUNDERS (auto refresh on load)
+  const [funderCount, setFunderCount] = useState(0);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("funders")) || [];
+    setFunderCount(saved.length);
+  }, []);
 
   return (
     <MainLayout title="Dashboard">
@@ -28,12 +34,12 @@ export default function Dashboard() {
         gap: "20px",
         alignItems: "stretch",
         marginTop: "40px",
-        flexWrap: "wrap" // 🔥 prevents layout breaking
+        flexWrap: "wrap"
       }}>
         
         <Card 
           title="Total Participants" 
-          value={participants.length} 
+          value={loading ? "..." : participants.length} 
           icon="👥"
           onClick={() => navigate("/participants")}
         />
@@ -79,12 +85,19 @@ export default function Dashboard() {
 
       </div>
 
+      {/* EMPTY STATE */}
+      {!loading && participants.length === 0 && (
+        <p style={{ marginTop: "20px" }}>
+          No participants yet. Add one to get started.
+        </p>
+      )}
+
     </MainLayout>
   );
 }
 
 
-// CARD COMPONENT (SAFE + CLICKABLE)
+// CARD COMPONENT
 function Card({ title, value, onClick, icon }) {
   return (
     <div 
@@ -98,8 +111,11 @@ function Card({ title, value, onClick, icon }) {
         cursor: "pointer",
         display: "flex",
         flexDirection: "column",
-        gap: "10px"
+        gap: "10px",
+        transition: "0.2s"
       }}
+      onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+      onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
     >
       <div style={{ fontSize: "28px" }}>
         {icon}
@@ -112,7 +128,7 @@ function Card({ title, value, onClick, icon }) {
 }
 
 
-// BUTTON STYLE (REUSABLE)
+// BUTTON STYLE
 const btn = {
   width: "100%",
   marginTop: "10px",
