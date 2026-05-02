@@ -1,16 +1,65 @@
-// layout/MainLayout.jsx
 import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, title }) {
+  const navigate = useNavigate();
+
+  const name = localStorage.getItem("name") || "User";
+  const role = localStorage.getItem("role") || "staff";
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{
+      display: "flex",
+      alignItems: "stretch",
+      minHeight: "100vh"
+    }}>
       <Sidebar />
-      <div style={{ flex: 1 }}>
-        <Header />
-        <div style={{ padding: "20px" }}>
+
+      <div style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column"
+      }}>
+        {/* HEADER */}
+        <div style={{
+          background: "#1f2937",
+          color: "white",
+          padding: "15px 20px",
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <h3><img 
+          src="/logo.png" 
+          alt="CETAT Logo" 
+          style={{ width: "35px", height: "35px" }}
+        /></h3>
+
+          <div>
+            👤 {name} ({role})
+            <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <div style={{ flex: 1, padding: "20px" }}>
           {children}
         </div>
+
+        {/* FOOTER */}
+        <footer style={{
+          background: "#1f2937",
+          color: "white",
+          padding: "20px"
+        }}>
+          CETAT DBMS
+        </footer>
       </div>
     </div>
   );
