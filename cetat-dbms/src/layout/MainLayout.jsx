@@ -26,21 +26,17 @@ export default function MainLayout({ children, title }) {
           justifyContent: "space-between",
           alignItems: "center"
         }}>
-          
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             
-            {/* 🔥 FORCE IMAGE RENDER */}
-            <img
-              src={logo}
-              alt="logo"
-              style={{
-                width: "40px",
-                height: "40px",
-                background: "white",   // 🔥 makes it visible even if transparent
-                padding: "3px",
-                borderRadius: "6px"
-              }}
-            />
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+
+            {/* 🔥 DEBUG IMAGE BLOCK */}
+            <div style={{ background: "red", padding: "5px" }}>
+              <img 
+                src={logo}
+                alt="logo"
+                style={{ width: "40px", height: "40px" }}
+              />
+            </div>
 
             <h3 style={{ margin: 0 }}>{title}</h3>
           </div>
