@@ -12,6 +12,10 @@ export default function MainLayout({ children, title }) {
   };
 
   return (
+
+    <div style={{ background: "red", color: "white" }}>
+    TEST HEADER
+
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar />
 
