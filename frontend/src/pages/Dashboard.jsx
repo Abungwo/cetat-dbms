@@ -23,11 +23,12 @@ export default function Dashboard() {
     <MainLayout title="Dashboard">
 
       {/* TOP SECTION */}
-      <div style={{
+     <div style={{
         display: "flex",
         gap: "15px",
         marginTop: "20px",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        justifyContent: "center"   // ✅ centers cards
       }}>
         <Card 
           title="Participants" 
@@ -97,9 +98,11 @@ export default function Dashboard() {
 const btn = {
   width: "100%",
   marginTop: "8px",
-  padding: "8px",
-  border: "1px solid #ddd",
-  background: "#f9fafb",
+  padding: "10px",
+  border: "none",
+  background: "#2563eb",
+  color: "white",
+  borderRadius: "6px",
   cursor: "pointer",
-  borderRadius: "5px"
+  fontWeight: "500"
 };
