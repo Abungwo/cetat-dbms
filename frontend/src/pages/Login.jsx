@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/cetat-logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,21 +26,71 @@ export default function Login() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px", marginBottom: "30px" }}>
-      <h3>Login</h3>
+    <div>
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      /><br /><br />
+      {/* TOP STRIPE */}
+      <div style={{
+        background: "#111827",
+        padding: "12px 20px",
+        display: "flex",
+        alignItems: "center"
+      }}>
+        <img
+          src={logo}
+          alt="CETAT Logo"
+          style={{
+            height: "40px",
+            width: "auto"
+          }}
+        />
+      </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
+      {/* LOGIN FORM */}
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: "100px"
+      }}>
+        <h3>Login</h3>
 
-      <button onClick={handleLogin}>Login</button>
+        <input
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          style={inputStyle}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          style={inputStyle}
+        />
+
+        <button onClick={handleLogin} style={btn}>
+          Login
+        </button>
+      </div>
     </div>
   );
 }
+
+// STYLES
+const inputStyle = {
+  marginTop: "10px",
+  padding: "10px",
+  width: "220px",
+  borderRadius: "5px",
+  border: "1px solid #ccc"
+};
+
+const btn = {
+  marginTop: "15px",
+  padding: "10px",
+  width: "220px",
+  background: "#2563eb",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer"
+};
