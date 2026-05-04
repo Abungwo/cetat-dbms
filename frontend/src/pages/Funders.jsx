@@ -81,7 +81,7 @@ export default function Funders() {
         justifyContent: "center",
         alignItems: "center",
         alignContent: "center",
-        borderRadiu: "5px" 
+        borderRadiu: "10px" 
       }}>
         <input
           placeholder="Funder Name"
