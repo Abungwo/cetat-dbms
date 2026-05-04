@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer
+} from "recharts";
 
 export default function Reports() {
   const [program, setProgram] = useState("");
@@ -9,20 +11,15 @@ export default function Reports() {
   const [data, setData] = useState([]);
   const [programs, setPrograms] = useState([]);
 
-  const fetchPrograms = () => {
-  fetch("https://cetat-backend.onrender.com/api/programs")
-    .then(res => res.json())
-    .then(data => {
-      setPrograms(data.map(p => p.name));
-    })
-    .catch(err => console.error(err));
-};
-
-  // ✅ Fetch programs dynamically
+  // FETCH PROGRAMS
   useEffect(() => {
-  fetchPrograms();
-}, []);
-  // ✅ Generate report
+    fetch("https://cetat-backend.onrender.com/api/programs")
+      .then(res => res.json())
+      .then(data => setPrograms(data.map(p => p.name)))
+      .catch(err => console.error(err));
+  }, []);
+
+  // GENERATE REPORT
   const generateReport = async () => {
     try {
       let url = "https://cetat-backend.onrender.com/api/participants/report";
@@ -32,7 +29,7 @@ export default function Reports() {
       if (startDate) params.push(`startDate=${startDate}`);
       if (endDate) params.push(`endDate=${endDate}`);
 
-      if (params.length > 0) {
+      if (params.length) {
         url += "?" + params.join("&");
       }
 
@@ -50,85 +47,101 @@ export default function Reports() {
     }
   };
 
-  // ✅ Export CSV
+  //  EXPORT CSV
   const exportCSV = () => {
-    const rows = [
-      ["Name", "Email", "Program", "Status"],
-      ...data.map((p) => [
-        `${p.first_name} ${p.last_name}`,
-        p.email,
-        p.program,
-        p.status,
-      ]),
-    ];
+    if (!data.length) return;
 
-    const csv =
-      "data:text/csv;charset=utf-8," +
-      rows.map((e) => e.join(",")).join("\n");
+    const headers = ["Name", "Email", "Program", "Status"];
+
+    const rows = data.map(p => [
+      `${p.first_name} ${p.last_name}`,
+      p.email,
+      p.program,
+      p.status
+    ]);
+
+    const csvContent = [headers, ...rows]
+      .map(row => row.join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
 
     const link = document.createElement("a");
-    link.href = encodeURI(csv);
-    link.download = "report.csv";
+    link.href = url;
+    link.download = "participants_report.csv";
     link.click();
   };
 
-  // ✅ Chart data
-  const chartData = data.length
-    ? Object.values(
-        data.reduce((acc, p) => {
-          acc[p.program] = acc[p.program] || { program: p.program, count: 0 };
-          acc[p.program].count++;
-          return acc;
-        }, {})
-      )
-    : [];
+  // CHART DATA
+  const chartData = Object.values(
+    data.reduce((acc, p) => {
+      acc[p.program] = acc[p.program] || { program: p.program, count: 0 };
+      acc[p.program].count++;
+      return acc;
+    }, {})
+  );
 
   return (
     <MainLayout title="Reports">
-      <h2>Generate Report</h2>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "100px" }}>
+      <h2 style={{ marginBottom: "20px" }}>Reports Dashboard</h2>
+
+      {/* FILTERS */}
+      <div style={{
+        display: "flex",
+        gap: "10px",
+        marginBottom: "20px",
+        flexWrap: "wrap"
+      }}>
         <select value={program} onChange={(e) => setProgram(e.target.value)}>
           <option value="">All Programs</option>
-          {programs.map((p, index) => (
-            <option key={index} value={p}>{p}</option>
+          {programs.map((p, i) => (
+            <option key={i} value={p}>{p}</option>
           ))}
         </select>
 
         <input type="date" onChange={(e) => setStartDate(e.target.value)} />
         <input type="date" onChange={(e) => setEndDate(e.target.value)} />
 
-        <button onClick={generateReport}>
+        <button onClick={generateReport} style={btnBlue}>
           Generate Report
         </button>
 
-        <button onClick={exportCSV} disabled={!data.length}>
-          Download CSV
+        <button onClick={exportCSV} disabled={!data.length} style={btnGreen}>
+          Export CSV
         </button>
       </div>
 
       {/* TABLE */}
-      <table style={{ width: "100%", background: "white", gap: "10px" }}>
-        <thead style={{background: "black", margin: "0px 0px 20px 0px", color: "white"}}>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Program</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((p) => (
-            <tr key={p._id}>
-              <td>{p.first_name} {p.last_name}</td>
-              <td>{p.email}</td>
-              <td>{p.program}</td>
-              <td>{p.status}</td>
+      {data.length > 0 && (
+        <table style={{
+          width: "100%",
+          background: "white",
+          borderRadius: "8px",
+          overflow: "hidden"
+        }}>
+          <thead style={{ background: "#111", color: "white" }}>
+            <tr>
+              <th style={th}>Name</th>
+              <th style={th}>Email</th>
+              <th style={th}>Program</th>
+              <th style={th}>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {data.map((p) => (
+              <tr key={p._id}>
+                <td style={td}>{p.first_name} {p.last_name}</td>
+                <td style={td}>{p.email}</td>
+                <td style={td}>{p.program}</td>
+                <td style={td}>{p.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       {/* CHART */}
       {chartData.length > 0 && (
@@ -142,14 +155,45 @@ export default function Reports() {
 
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
-              <XAxis dataKey="program" stroke="#333" />
-              <YAxis stroke="#333" />
+              <XAxis dataKey="program" />
+              <YAxis />
               <Tooltip />
               <Bar dataKey="count" fill="#2563eb" />
             </BarChart>
           </ResponsiveContainer>
         </div>
       )}
+
     </MainLayout>
   );
 }
+
+
+// STYLES
+const btnBlue = {
+  padding: "10px",
+  background: "#2563eb",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer"
+};
+
+const btnGreen = {
+  padding: "10px",
+  background: "#16a34a",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer"
+};
+
+const th = {
+  padding: "10px",
+  textAlign: "left"
+};
+
+const td = {
+  padding: "10px",
+  borderTop: "1px solid #eee"
+};
