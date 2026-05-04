@@ -78,7 +78,9 @@ export default function Funders() {
         display: "flex",
         gap: "10px",
         flexWrap: "wrap",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center" 
       }}>
         <input
           placeholder="Funder Name"
@@ -159,7 +161,8 @@ const inputStyle = {
   padding: "10px",
   borderRadius: "5px",
   border: "1px solid #ccc",
-  minWidth: "200px"
+  minWidth: "200px",
+  flex: "0 1 auto"  
 };
 
 const btnBlue = {
@@ -168,7 +171,9 @@ const btnBlue = {
   color: "white",
   border: "none",
   borderRadius: "5px",
-  cursor: "pointer"
+  cursor: "pointer",
+  display: "inline-block", 
+  textAlign: "center"
 };
 
 const th = {
