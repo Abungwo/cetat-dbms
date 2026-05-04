@@ -8,7 +8,8 @@ export default function Funders() {
   const [form, setForm] = useState({
     name: "",
     program: "",
-    amount: ""
+    amount: "",
+    date: ""
   });
 
   // LOAD FUNDERS
@@ -19,21 +20,22 @@ export default function Funders() {
 
   // ADD FUNDER + CREATE PARTICIPANT
   const handleAdd = async () => {
-    if (!form.name || !form.program || !form.amount) return;
+    if (!form.name || !form.program || !form.amount || !form.date) return;
 
     try {
       const newFunder = {
         name: form.name,
         program: form.program,
-        amount: form.amount
+        amount: form.amount,
+        date: form.date   // ✅ FIXED (date saved)
       };
 
-      // ✔ Save locally
+      // Save locally
       const updated = [...funders, newFunder];
       setFunders(updated);
       localStorage.setItem("funders", JSON.stringify(updated));
 
-      // ✔ ALSO create participant in backend
+      // Create participant in backend
       await fetch("https://cetat-backend.onrender.com/api/participants", {
         method: "POST",
         headers: {
@@ -44,14 +46,15 @@ export default function Funders() {
           last_name: "Funder",
           email: `${form.name.replace(/\s+/g, "").toLowerCase()}@funder.com`,
           program: form.program,
-          status: "Funded"
+          status: "Funded",
+          createdAt: form.date   // ✅ helps report filtering
         })
       });
 
       alert("Funder added and participant created");
 
       // reset form
-      setForm({ name: "", program: "", amount: "" });
+      setForm({ name: "", program: "", amount: "", date: "" });
 
     } catch (err) {
       console.error(err);
@@ -70,7 +73,7 @@ export default function Funders() {
 
   return (
     <MainLayout title="Funders">
-      <h2 style={{ marginBottom: "30px" }}></h2>
+      <h2 style={{ marginBottom: "20px" }}>Funders</h2>
 
       {/* FORM */}
       <div style={{
@@ -79,9 +82,7 @@ export default function Funders() {
         gap: "10px",
         flexWrap: "wrap",
         justifyContent: "center",
-        alignItems: "center",
-        alignContent: "left",
-        borderRadiu: "10px" 
+        alignItems: "center"
       }}>
         <input
           placeholder="Funder Name"
@@ -94,6 +95,7 @@ export default function Funders() {
           placeholder="Program"
           value={form.program}
           onChange={(e) => setForm({ ...form, program: e.target.value })}
+          style={inputStyle}
         />
 
         <input
@@ -101,6 +103,15 @@ export default function Funders() {
           placeholder="Amount ($)"
           value={form.amount}
           onChange={(e) => setForm({ ...form, amount: e.target.value })}
+          style={inputStyle}
+        />
+
+        {/* ✅ NEW DATE FIELD */}
+        <input
+          type="date"
+          value={form.date}
+          onChange={(e) => setForm({ ...form, date: e.target.value })}
+          style={inputStyle}
         />
 
         <button onClick={handleAdd} style={btnBlue}>
@@ -120,6 +131,7 @@ export default function Funders() {
             <th style={th}>Name</th>
             <th style={th}>Program</th>
             <th style={th}>Amount ($)</th>
+            <th style={th}>Date</th> {/* ✅ NEW COLUMN */}
             <th style={th}>Actions</th>
           </tr>
         </thead>
@@ -130,6 +142,7 @@ export default function Funders() {
               <td style={td}>{f.name}</td>
               <td style={td}>{f.program}</td>
               <td style={td}>{f.amount}</td>
+              <td style={td}>{f.date}</td> {/* ✅ SHOW DATE */}
               <td style={td}>
                 <button
                   onClick={() => handleDelete(index)}
@@ -156,14 +169,12 @@ export default function Funders() {
 
 
 // STYLES
-
 const inputStyle = {
   textAlign: "left",
   padding: "10px",
   borderRadius: "10px",
   border: "1px solid #ccc",
-  minWidth: "200px",
-  flex: "0 1 auto"  
+  minWidth: "200px"
 };
 
 const btnBlue = {
@@ -172,9 +183,7 @@ const btnBlue = {
   color: "white",
   border: "none",
   borderRadius: "5px",
-  cursor: "pointer",
-  display: "inline-block", 
-  textAlign: "center"
+  cursor: "pointer"
 };
 
 const th = {
