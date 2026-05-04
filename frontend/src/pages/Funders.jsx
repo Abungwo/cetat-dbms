@@ -183,5 +183,6 @@ const th = {
 
 const td = {
   padding: "10px",
-  borderTop: "1px solid #eee"
+  borderTop: "1px solid #eee",
+  borderRadiu: "5px"
 };
