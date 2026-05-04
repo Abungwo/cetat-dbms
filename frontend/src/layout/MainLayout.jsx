@@ -45,8 +45,9 @@ export default function MainLayout({ children, title }) {
               alt="CETAT Logo"
               style={{
                 height: "40px",
-                width: "auto",      // 🔥 keeps original proportions
-                objectFit: "contain"
+                width: "auto",     
+                objectFit: "contain",
+                borderRadius: "10px"
               }}
             />
             <h3 style={{ margin: 0 }}>{title}</h3>
