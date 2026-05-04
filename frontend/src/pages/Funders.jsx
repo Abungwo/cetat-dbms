@@ -158,7 +158,7 @@ export default function Funders() {
 // STYLES
 
 const inputStyle = {
-  textAlign: "center",
+  textAlign: "left",
   padding: "10px",
   borderRadius: "5px",
   border: "1px solid #ccc",
