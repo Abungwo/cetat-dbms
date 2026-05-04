@@ -160,7 +160,7 @@ export default function Funders() {
 const inputStyle = {
   textAlign: "left",
   padding: "10px",
-  borderRadius: "5px",
+  borderRadius: "10px",
   border: "1px solid #ccc",
   minWidth: "200px",
   flex: "0 1 auto"  
@@ -179,7 +179,7 @@ const btnBlue = {
 
 const th = {
   padding: "10px",
-  textAlign: "center"
+  textAlign: "left"
 };
 
 const td = {
