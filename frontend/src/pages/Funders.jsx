@@ -80,7 +80,7 @@ export default function Funders() {
         flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
-        alignContent: "center",
+        alignContent: "left",
         borderRadiu: "10px" 
       }}>
         <input
@@ -179,7 +179,7 @@ const btnBlue = {
 
 const th = {
   padding: "10px",
-  textAlign: "left"
+  textAlign: "center"
 };
 
 const td = {
