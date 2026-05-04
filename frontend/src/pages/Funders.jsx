@@ -11,13 +11,13 @@ export default function Funders() {
     amount: ""
   });
 
-  // ✅ LOAD FUNDERS
+  // LOAD FUNDERS
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("funders")) || [];
     setFunders(saved);
   }, []);
 
-  // ✅ ADD FUNDER + CREATE PARTICIPANT
+  // ADD FUNDER + CREATE PARTICIPANT
   const handleAdd = async () => {
     if (!form.name || !form.program || !form.amount) return;
 
@@ -59,7 +59,7 @@ export default function Funders() {
     }
   };
 
-  // ✅ DELETE FUNDER (FIXED)
+  // DELETE FUNDER
   const handleDelete = (index) => {
     if (!window.confirm("Delete this funder?")) return;
 
@@ -70,11 +70,11 @@ export default function Funders() {
 
   return (
     <MainLayout title="Funders">
-      <h2 style={{ marginBottom: "20px" }}>Funders</h2>
+      <h2 style={{ marginBottom: "30px" }}>Funders</h2>
 
       {/* FORM */}
       <div style={{
-        marginBottom: "20px",
+        marginBottom: "30px",
         display: "flex",
         gap: "10px",
         flexWrap: "wrap"
@@ -150,7 +150,7 @@ export default function Funders() {
 }
 
 
-// ✅ STYLES
+// STYLES
 const btnBlue = {
   padding: "10px",
   background: "#2563eb",
