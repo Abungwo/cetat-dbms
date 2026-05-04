@@ -5,7 +5,6 @@ import logo from "../assets/cetat-logo.png";
 export default function MainLayout({ children, title }) {
   const navigate = useNavigate();
 
-  const name = localStorage.getItem("name") || "User";
   const role = localStorage.getItem("role") || "staff";
 
   const handleLogout = () => {
@@ -23,7 +22,12 @@ export default function MainLayout({ children, title }) {
       <div style={{
         flex: 1,
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        margin: "20px",
+        border: "1px solid #e5e7eb",
+        borderRadius: "10px",
+        overflow: "hidden",
+        background: "#f9fafb"
       }}>
         
         {/* HEADER */}
@@ -51,9 +55,13 @@ export default function MainLayout({ children, title }) {
             <h3 style={{ margin: 0 }}>{title}</h3>
           </div>
 
-          <div>
-            👤 {name} ({role})
-            <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
+          {/* ✅ SHOW ONLY ROLE */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ fontWeight: "500" }}>
+              👤 {role.charAt(0).toUpperCase() + role.slice(1)}
+            </span>
+
+            <button onClick={handleLogout}>
               Logout
             </button>
           </div>
