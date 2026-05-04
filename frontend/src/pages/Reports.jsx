@@ -21,31 +21,59 @@ export default function Reports() {
 
   // GENERATE REPORT
   const generateReport = async () => {
-    try {
-      let url = "https://cetat-backend.onrender.com/api/participants/report";
+  try {
+    let url = "https://cetat-backend.onrender.com/api/participants/report";
 
-      const params = [];
-      if (program) params.push(`program=${program}`);
-      if (startDate) params.push(`startDate=${startDate}`);
-      if (endDate) params.push(`endDate=${endDate}`);
+    const params = [];
+    if (program) params.push(`program=${program}`);
+    if (startDate) params.push(`startDate=${startDate}`);
+    if (endDate) params.push(`endDate=${endDate}`);
 
-      if (params.length) {
-        url += "?" + params.join("&");
-      }
-
-      const res = await fetch(url);
-      const result = await res.json();
-
-      setData(result);
-
-      if (!result.length) {
-        alert("No data found for selected filters");
-      }
-
-    } catch (err) {
-      console.error(err);
+    if (params.length) {
+      url += "?" + params.join("&");
     }
-  };
+
+    // FETCH PARTICIPANTS FROM BACKEND
+    const res = await fetch(url);
+    const participants = await res.json();
+
+    // GET FUNDERS FROM LOCAL STORAGE
+    let funders = JSON.parse(localStorage.getItem("funders")) || [];
+
+    // FILTER FUNDERS BY DATE + PROGRAM
+    funders = funders.filter(f => {
+      const funderDate = new Date(f.date);
+
+      const matchProgram = program ? f.program === program : true;
+      const matchStart = startDate ? funderDate >= new Date(startDate) : true;
+      const matchEnd = endDate ? funderDate <= new Date(endDate) : true;
+
+      return matchProgram && matchStart && matchEnd;
+    });
+
+    // CONVERT FUNDERS TO PARTICIPANT FORMAT
+    const funderAsParticipants = funders.map(f => ({
+      _id: Math.random(), // temporary ID
+      first_name: f.name,
+      last_name: "(Funder)",
+      email: "N/A",
+      program: f.program,
+      status: "Funded"
+    }));
+
+    // MERGE BOTH
+    const combined = [...participants, ...funderAsParticipants];
+
+    setData(combined);
+
+    if (!combined.length) {
+      alert("No data found for selected filters");
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   //  EXPORT CSV
   const exportCSV = () => {
