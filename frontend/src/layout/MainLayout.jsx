@@ -44,11 +44,11 @@ export default function MainLayout({ children, title }) {
               src={logo}
               alt="CETAT Logo"
               style={{
-                width: "40px",
+                width: "65px",
                 height: "40px",
                 objectFit: "contain",
                 background: "white",
-                padding: "4px",
+                padding: "25px",
                 borderRadius: "6px"
               }}
             />
