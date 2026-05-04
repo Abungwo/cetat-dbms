@@ -55,7 +55,7 @@ export default function MainLayout({ children, title }) {
             <h3 style={{ margin: 0 }}>{title}</h3>
           </div>
 
-          {/* ✅ SHOW ONLY ROLE */}
+          {/* SHOW ONLY ROLE */}
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <span style={{ fontWeight: "500" }}>
               👤 {role.charAt(0).toUpperCase() + role.slice(1)}
