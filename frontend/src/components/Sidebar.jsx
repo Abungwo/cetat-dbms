@@ -10,7 +10,7 @@ export default function Sidebar() {
     borderRadius: "6px",
     cursor: "pointer",
     background: location.pathname === path ? "#2563eb" : "transparent",
-    color: location.pathname === path ? "white" : "#111",
+    color: location.pathname === path ? "white" : "#374151",
     fontWeight: location.pathname === path ? "bold" : "normal"
   });
 

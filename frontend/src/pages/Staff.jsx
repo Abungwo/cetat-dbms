@@ -39,7 +39,7 @@ export default function Staff() {
 
   return (
     <MainLayout title="Staff">
-      <h2>Staff</h2>
+      <h2></h2>
 
       <div style={{ marginBottom: "100px", display: "flex", gap: "10px"}}>
         <input

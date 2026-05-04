@@ -85,7 +85,7 @@ export default function Reports() {
   return (
     <MainLayout title="Reports">
 
-      <h2 style={{ marginBottom: "20px" }}>Reports Dashboard</h2>
+      <h2 style={{ marginBottom: "20px" }}></h2>
 
       {/* FILTERS */}
       <div style={{

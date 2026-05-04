@@ -72,7 +72,7 @@ export default function Programs() {
 
   return (
     <MainLayout title="Programs">
-      <h2>Programs</h2>
+      <h2></h2>
 
       {/* ADD PROGRAM */}
       <div style={{ marginBottom: "100px", display: "flex", gap: "10px"}}>

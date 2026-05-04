@@ -32,9 +32,9 @@ export default function MainLayout({ children, title }) {
         
         {/* HEADER */}
         <div style={{
-          background: "#1f2937",
+          background: "#111827",
           color: "white",
-          padding: "15px 20px",
+          padding: "12px 20px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center"
@@ -47,10 +47,12 @@ export default function MainLayout({ children, title }) {
                 height: "40px",
                 width: "auto",     
                 objectFit: "contain",
-                borderRadius: "10px"
+                borderRadius: "8px"
               }}
             />
-            <h3 style={{ margin: 0 }}>{title}</h3>
+            <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "600" }}>
+              {title}
+            </h3>
           </div>
 
           {/* SHOW ONLY ROLE */}
@@ -72,11 +74,15 @@ export default function MainLayout({ children, title }) {
 
         {/* FOOTER */}
         <footer style={{
-          background: "#1f2937",
-          color: "white",
-          padding: "20px"
+          background: "#111827",
+          color: "#d1d5db",
+          padding: "18px",
+          textAlign: "center",
+          letterSpacing: "0.3px",
+          fontSize: "14px",
+          borderTop: "1px solid #e5e7eb"
         }}>
-          CETAT DBMS
+          © {new Date().getFullYear()} CETAT DBMS | Group 2, Course - INT-2840-RE02.2026SP - PGCC
         </footer>
       </div>
     </div>

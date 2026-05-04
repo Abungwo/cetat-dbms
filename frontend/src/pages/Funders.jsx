@@ -70,7 +70,7 @@ export default function Funders() {
 
   return (
     <MainLayout title="Funders">
-      <h2 style={{ marginBottom: "30px" }}>Funders</h2>
+      <h2 style={{ marginBottom: "30px" }}></h2>
 
       {/* FORM */}
       <div style={{

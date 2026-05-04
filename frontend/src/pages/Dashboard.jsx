@@ -24,11 +24,14 @@ export default function Dashboard() {
 
       {/* TOP SECTION */}
       <div style={{
-        display: "flex",
-        gap: "20px",
-        alignItems: "stretch",
-        marginTop: "40px",
-        flexWrap: "wrap"
+        background: "white",
+        padding: "20px",
+        borderRadius: "12px",
+        width: "200px",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+        textAlign: "center"
       }}>
         
         {/* CLICKABLE CARDS */}
@@ -97,8 +100,14 @@ function Card({ title, value, onClick }) {
         cursor: "pointer",
         transition: "0.2s"
       }}
-      onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-      onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-5px)";
+        e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.08)";
+      }}
     >
       <h2 style={{ margin: 0 }}>{value}</h2>
       <p style={{ margin: 0 }}>{title}</p>

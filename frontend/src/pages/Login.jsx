@@ -25,8 +25,8 @@ export default function Login() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>CETAT DBMS</h1>
+    <div style={{ textAlign: "center", marginTop: "100px", marginBottom: "30px" }}>
+      <h3>Login</h3>
 
       <input
         placeholder="Email"
