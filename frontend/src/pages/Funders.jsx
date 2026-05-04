@@ -74,13 +74,14 @@ export default function Funders() {
 
       {/* FORM */}
       <div style={{
-        marginBottom: "20px",
+        marginBottom: "30px",
         display: "flex",
         gap: "10px",
         flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
-        alignContent: "center" 
+        alignContent: "center",
+        borderRadiu: "5px" 
       }}>
         <input
           placeholder="Funder Name"
@@ -183,6 +184,5 @@ const th = {
 
 const td = {
   padding: "10px",
-  borderTop: "1px solid #eee",
-  borderRadiu: "5px"
+  borderTop: "1px solid #eee"
 };
