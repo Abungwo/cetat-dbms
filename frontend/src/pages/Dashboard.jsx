@@ -6,35 +6,18 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const [participants, setParticipants] = useState([]);
-  const [programs, setPrograms] = useState([]);
 
-  // 🔥 FETCH BOTH DATA SOURCES
+  // FETCH PARTICIPANTS ONLY
   useEffect(() => {
-    // Participants
     fetch("https://cetat-backend.onrender.com/api/participants")
       .then(res => res.json())
       .then(data => setParticipants(data))
       .catch(err => console.error(err));
-
-    // Programs
-    fetch("https://cetat-backend.onrender.com/api/programs")
-      .then(res => res.json())
-      .then(data => setPrograms(data))
-      .catch(err => console.error(err));
-
   }, []);
 
-  // ✅ CORRECT COUNTS
-  const programCount = programs.length;
-
-  // ✅ OPTIONAL: funders from localStorage
+  // FUNDERS FROM LOCAL STORAGE
   const funders = JSON.parse(localStorage.getItem("funders")) || [];
   const funderCount = funders.length;
-
-  // ✅ RECENT ACTIVITY
-  const recentParticipants = [...participants]
-    .slice(-5)
-    .reverse();
 
   return (
     <MainLayout title="Dashboard">
@@ -44,12 +27,22 @@ export default function Dashboard() {
         display: "flex",
         gap: "20px",
         alignItems: "stretch",
-        marginTop: "40px"
+        marginTop: "40px",
+        flexWrap: "wrap"
       }}>
         
-        <Card title="Total Participants" value={participants.length} />
-        <Card title="Active Programs" value={programCount} />
-        <Card title="Funders" value={funderCount} />
+        {/* CLICKABLE CARDS */}
+        <Card 
+          title="Total Participants" 
+          value={participants.length} 
+          onClick={() => navigate("/participants")}
+        />
+
+        <Card 
+          title="Funders" 
+          value={funderCount} 
+          onClick={() => navigate("/funders")}
+        />
 
         {/* QUICK ACTION */}
         <div style={{
@@ -62,21 +55,21 @@ export default function Dashboard() {
           <h4>Quick Action</h4>
 
           <button
-            style={{ width: "100%", marginTop: "10px" }}
+            style={btn}
             onClick={() => navigate("/add-participant")}
           >
             Add Participant
           </button>
 
           <button
-            style={{ width: "100%", marginTop: "10px" }}
+            style={btn}
             onClick={() => navigate("/programs")}
           >
             Create Program
           </button>
 
           <button
-            style={{ width: "100%", marginTop: "10px" }}
+            style={btn}
             onClick={() => navigate("/funders")}
           >
             + Add Funder
@@ -85,25 +78,43 @@ export default function Dashboard() {
 
       </div>
 
-      
-
     </MainLayout>
   );
 }
 
 
-// CARD COMPONENT
-function Card({ title, value }) {
+// CLICKABLE CARD COMPONENT
+function Card({ title, value, onClick }) {
   return (
-    <div style={{
-      background: "white",
-      padding: "20px",
-      borderRadius: "10px",
-      width: "180px",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
-    }}>
-      <h2>{value}</h2>
-      <p>{title}</p>
+    <div
+      onClick={onClick}
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        width: "180px",
+        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+        cursor: "pointer",
+        transition: "0.2s"
+      }}
+      onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+      onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+    >
+      <h2 style={{ margin: 0 }}>{value}</h2>
+      <p style={{ margin: 0 }}>{title}</p>
     </div>
   );
 }
+
+
+// BUTTON STYLE
+const btn = {
+  width: "100%",
+  marginTop: "10px",
+  padding: "10px",
+  border: "none",
+  background: "#2563eb",
+  color: "white",
+  borderRadius: "5px",
+  cursor: "pointer"
+};
