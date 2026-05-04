@@ -24,58 +24,44 @@ export default function Dashboard() {
 
       {/* TOP SECTION */}
       <div style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "12px",
-        width: "200px",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-        cursor: "pointer",
-        transition: "all 0.2s ease",
-        textAlign: "center"
+        display: "flex",
+        gap: "15px",
+        marginTop: "20px",
+        flexWrap: "wrap"
       }}>
-        
-        {/* CLICKABLE CARDS */}
         <Card 
-          title="Total Participants" 
-          value={participants.length} 
+          title="Participants" 
+          value={participants.length}
           onClick={() => navigate("/participants")}
         />
 
         <Card 
           title="Funders" 
-          value={funderCount} 
+          value={funderCount}
           onClick={() => navigate("/funders")}
         />
 
         {/* QUICK ACTION */}
         <div style={{
+          marginTop: "20px",
           background: "white",
-          padding: "20px",
-          borderRadius: "10px",
-          width: "220px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
+          padding: "15px",
+          borderRadius: "8px",
+          width: "200px",
+          border: "1px solid #e5e7eb"
         }}>
-          <h4>Quick Action</h4>
+          <h4 style={{ marginTop: 0 }}>Quick Actions</h4>
 
-          <button
-            style={btn}
-            onClick={() => navigate("/add-participant")}
-          >
+          <button style={btn} onClick={() => navigate("/add-participant")}>
             Add Participant
           </button>
 
-          <button
-            style={btn}
-            onClick={() => navigate("/programs")}
-          >
+          <button style={btn} onClick={() => navigate("/programs")}>
             Create Program
           </button>
 
-          <button
-            style={btn}
-            onClick={() => navigate("/funders")}
-          >
-            + Add Funder
+          <button style={btn} onClick={() => navigate("/funders")}>
+            Add Funder
           </button>
         </div>
 
@@ -87,43 +73,33 @@ export default function Dashboard() {
 
 
 // CLICKABLE CARD COMPONENT
-function Card({ title, value, onClick }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        width: "180px",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        cursor: "pointer",
-        transition: "0.2s"
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-5px)";
-        e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.08)";
-      }}
-    >
-      <h2 style={{ margin: 0 }}>{value}</h2>
-      <p style={{ margin: 0 }}>{title}</p>
-    </div>
-  );
-}
+  function Card({ title, value, onClick }) {
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          background: "white",
+          padding: "15px",
+          borderRadius: "8px",
+          width: "160px",
+          border: "1px solid #e5e7eb",
+          cursor: "pointer"
+        }}
+      >
+        <h2 style={{ margin: "0 0 5px 0" }}>{value}</h2>
+        <p style={{ margin: 0, color: "#555" }}>{title}</p>
+      </div>
+    );
+  }
 
 
 // BUTTON STYLE
 const btn = {
   width: "100%",
-  marginTop: "10px",
-  padding: "10px",
-  border: "none",
-  background: "#2563eb",
-  color: "white",
-  borderRadius: "5px",
-  cursor: "pointer"
+  marginTop: "8px",
+  padding: "8px",
+  border: "1px solid #ddd",
+  background: "#f9fafb",
+  cursor: "pointer",
+  borderRadius: "5px"
 };
