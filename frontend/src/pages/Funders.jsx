@@ -74,15 +74,17 @@ export default function Funders() {
 
       {/* FORM */}
       <div style={{
-        marginBottom: "30px",
+        marginBottom: "20px",
         display: "flex",
         gap: "10px",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        justifyContent: "center"
       }}>
         <input
           placeholder="Funder Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
+          style={inputStyle}
         />
 
         <input
@@ -151,6 +153,15 @@ export default function Funders() {
 
 
 // STYLES
+
+const inputStyle = {
+  textAlign: "center",
+  padding: "10px",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  minWidth: "200px"
+};
+
 const btnBlue = {
   padding: "10px",
   background: "#2563eb",
